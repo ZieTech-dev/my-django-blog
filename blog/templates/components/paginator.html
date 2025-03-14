@@ -1,0 +1,28 @@
+﻿{% if datas.has_other_pages %}
+    <!-- Page Pagination Start -->
+    <div class="page-pagination wow fadeInUp" data-wow-delay="1.2s">
+        <ul class="pagination">
+            <!-- Boutons "Précédent" et "Première Page" -->
+            {% if datas.has_previous %}
+                <li><a href="?page=1"><i class="fa-solid fa-angle-double-left"></i></a></li>
+                <li><a href="?page={{ datas.previous_page_number }}"><i class="fa-solid fa-angle-left"></i></a></li>
+            {% endif %}
+
+            <!-- Affichage des numéros de page avec une plage de -3 à +3 -->
+            {% for num in datas.paginator.page_range %}
+                {% if num >= datas.number|add:'-3' and num <= datas.number|add:'3' %}
+                    <li class="{% if datas.number == num %}active{% endif %}">
+                        <a href="?page={{ num }}">{{ num }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+
+            <!-- Boutons "Suivant" et "Dernière Page" -->
+            {% if datas.has_next %}
+                <li><a href="?page={{ datas.next_page_number }}"><i class="fa-solid fa-angle-right"></i></a></li>
+                <li><a href="?page={{ datas.paginator.num_pages }}"><i class="fa-solid fa-angle-double-right"></i></a></li>
+            {% endif %}
+        </ul>
+    </div>
+    <!-- Page Pagination End -->
+{% endif %}

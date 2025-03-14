@@ -1,0 +1,284 @@
+
+
+{% extends "base.html" %}
+
+{% load static %}
+
+
+{% block style %}
+{% endblock %}
+
+{% block Boxheader %}
+
+    <div class="page-header-box">
+        <h1 class="text-anime-style-2" data-cursor="-opaque">Home</h1>
+        {% if user.is_authenticated %}
+            <h4 class="text-anime-style-2" data-cursor="-opaque">Bienvenue👋, {{ user.username }} !</h4>
+        {% endif %}
+        <nav class="wow fadeInUp">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'index' %}">home</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'about' %}">about us</a></li>
+            </ol>
+        </nav>
+    </div>
+{% endblock Boxheader %}
+
+{% block content %}
+    {% comment %} <div> {% endcomment %}
+{% comment %}         
+        {% for article in articles %}
+
+            {{ article }}
+            <ul>
+                <li>{{ article.titre }}</li>
+                <li>{{ article.resume }}</li>
+                <li>{{ article.contenu }}</li>
+                <li>{{ article.auteur_id }}</li>
+                <li>tags</li>
+                <ul>    	
+                    {% for tag in article.tag_ids.all %}
+                        <li>{{ tag.nom }}</li>
+                    {% endfor %}
+                </ul>
+                <li>{{ article.est_publie }}</li>
+                <li>{{ article.date_de_publication }}</li>
+                <li>{{ article.statut }}</li>
+                <li>{{ article.last_updated_at }}</li>
+                
+            </ul>
+        {% endfor %} {% endcomment %}
+
+
+    <div class="page-blog">
+        <div class="container">
+            <div class="row">
+                {% for article in articles %}
+                    <div class="col-lg-4 col-md-6">
+                        <!-- Post Item Start -->
+                        <div class="post-item wow fadeInUp">
+                            <!-- Post Featured Image Start-->
+                            <div class="post-featured-image">
+                                <figure>
+                                    <a href="{% url 'blog_single' article.slug %}" class="image-anime" data-cursor-text="View">
+                                        {% if article.couverture %}
+                                            <img src="{{ article.couverture.url }}" alt="Image de couverture de {{ article.titre }}">
+                                        {% else %}
+                                        
+                                        <img src="{% static 'images/post-1.jpg' %}" alt="">
+                                        {% endif %}
+                                    </a>
+                                </figure>
+                            </div>
+                            <!-- Post Featured Image End -->
+
+                            <!-- Post Item Body Start -->
+                            <div class="post-item-body">
+                                <!-- Post Item Content Start -->
+                                <div class="post-item-content">
+                                    <h3><a href="{% url 'blog_single' article.slug %}">{{ article.titre }}</a></h3>
+                                    <p>{{ article.resume|truncatewords:5 }}</p>
+                                </div>
+                                <!-- Post Item Content End -->
+
+                                <!-- Blog Item Button Start -->
+                                <div class="post-item-btn">
+                                    <a href="{% url 'blog_single' article.slug %}" class="post-btn">read more</a>
+                                </div>
+                                <!-- Blog Item Button End -->
+                            </div>
+                            <!-- Post Item Body End -->
+                        </div>
+                        <!-- Post Item End -->
+                    </div>
+                {% endfor %}
+                {% comment %} <div class="col-lg-4 col-md-6">
+                    <!-- Post Item Start -->
+                    <div class="post-item wow fadeInUp" data-wow-delay="0.2s">
+                        <!-- Post Featured Image Start-->
+                        <div class="post-featured-image">
+                            <figure>
+                                <a href="{% url 'blog_single' %}" class="image-anime" data-cursor-text="View">
+                                    <img src="{% static 'images/post-2.jpg' %}" alt="">
+                                </a>
+                            </figure>
+                        </div>
+                        <!-- Post Featured Image End -->
+
+                        <!-- Post Item Body Start -->
+                        <div class="post-item-body">
+                            
+                            <!-- Post Item Content Start -->
+                            <div class="post-item-content">
+                                <h3><a href="{% url 'blog_single' %}">Innovative Décor Ideas Shaping Homes Today</a></h3>
+                            </div>
+                            <!-- Post Item Content End -->
+
+                            <!-- Blog Item Button Start -->
+                            <div class="post-item-btn">
+                                <a href="{% url 'blog_single' %}" class="post-btn">read more</a>
+                            </div>
+                            <!-- Blog Item Button End -->
+                        </div>
+                        <!-- Post Item Body End -->
+                    </div>
+                    <!-- Post Item End -->
+                </div> {% endcomment %}
+
+                {% comment %} <div class="col-lg-4 col-md-6">
+                    <!-- Post Item Start -->
+                    <div class="post-item wow fadeInUp" data-wow-delay="0.4s">
+                        <!-- Post Featured Image Start-->
+                        <div class="post-featured-image">
+                            <figure>
+                                <a href="{% url 'blog_single' %}" class="image-anime" data-cursor-text="View">
+                                    <img src="{% static 'images/post-3.jpg' %}" alt="">
+                                </a>
+                            </figure>
+                        </div>
+                        <!-- Post Featured Image End -->
+
+                        <!-- Post Item Body Start -->
+                        <div class="post-item-body">
+                            <!-- Post Item Content Start -->
+                            <div class="post-item-content">
+                                <h3><a href="{% url 'blog_single' %}">Design Industry Updates You Should Know About</a></h3>
+                            </div>
+                            <!-- Post Item Content End -->
+
+                            <!-- Blog Item Button Start -->
+                            <div class="post-item-btn">
+                                <a href="{% url 'blog_single' %}" class="post-btn">read more</a>
+                            </div>
+                            <!-- Blog Item Button End -->
+                        </div>
+                        <!-- Post Item Body End -->
+                    </div>
+                    <!-- Post Item End -->
+                </div> {% endcomment %}
+
+                {% comment %} <div class="col-lg-4 col-md-6">
+                    <!-- Post Item Start -->
+                    <div class="post-item wow fadeInUp" data-wow-delay="0.6s">
+                        <!-- Post Featured Image Start-->
+                        <div class="post-featured-image">
+                            <figure>
+                                <a href="{% url 'blog_single' %}" class="image-anime" data-cursor-text="View">
+                                    <img src="{% static 'images/post-4.jpg' %}" alt="">
+                                </a>
+                            </figure>
+                        </div>
+                        <!-- Post Featured Image End -->
+
+                        <!-- Post Item Body Start -->
+                        <div class="post-item-body">
+                            <!-- Post Item Content Start -->
+                            <div class="post-item-content">
+                                <h3><a href="{% url 'blog_single' %}">How Do You Choose the Right Lighting for Each Room?</a></h3>
+                            </div>
+                            <!-- Post Item Content End -->
+
+                            <!-- Blog Item Button Start -->
+                            <div class="post-item-btn">
+                                <a href="{% url 'blog_single' %}" class="post-btn">read more</a>
+                            </div>
+                            <!-- Blog Item Button End -->
+                        </div>
+                        <!-- Post Item Body End -->
+                    </div>
+                    <!-- Post Item End -->
+                </div> {% endcomment %}
+
+                {% comment %} <div class="col-lg-4 col-md-6">
+                    <!-- Post Item Start -->
+                    <div class="post-item wow fadeInUp" data-wow-delay="0.8s">
+                        <!-- Post Featured Image Start-->
+                        <div class="post-featured-image">
+                            <figure>
+                                <a href="{% url 'blog_single' %}" class="image-anime" data-cursor-text="View">
+                                    <img src="{% static 'images/post-5.jpg' %}" alt="">
+                                </a>
+                            </figure>
+                        </div>
+                        <!-- Post Featured Image End -->
+
+                        <!-- Post Item Body Start -->
+                        <div class="post-item-body">
+                            <!-- Post Item Content Start -->
+                            <div class="post-item-content">
+                                <h3><a href="{% url 'blog_single' %}">How Can Custom Furniture Elevate Your Home's Aesthetic?</a></h3>
+                            </div>
+                            <!-- Post Item Content End -->
+
+                            <!-- Blog Item Button Start -->
+                            <div class="post-item-btn">
+                                <a href="{% url 'blog_single' %}" class="post-btn">read more</a>
+                            </div>
+                            <!-- Blog Item Button End -->
+                        </div>
+                        <!-- Post Item Body End -->
+                    </div>
+                    <!-- Post Item End -->
+                </div> {% endcomment %}
+
+                {% comment %} <div class="col-lg-4 col-md-6">
+                    <!-- Post Item Start -->
+                    <div class="post-item wow fadeInUp" data-wow-delay="1s">
+                        <!-- Post Featured Image Start-->
+                        <div class="post-featured-image">
+                            <figure>
+                                <a href="{% url 'blog_single' %}" class="image-anime" data-cursor-text="View">
+                                    <img src="{% static 'images/post-6.jpg' %}" alt="">
+                                </a>
+                            </figure>
+                        </div>
+                        <!-- Post Featured Image End -->
+
+                        <!-- Post Item Body Start -->
+                        <div class="post-item-body">
+                            <!-- Post Item Content Start -->
+                            <div class="post-item-content">
+                                <h3><a href="{% url 'blog_single' %}">What Are Simple Ways to Refresh Your Interior on a Budget?</a></h3>
+                            </div>
+                            <!-- Post Item Content End -->
+
+                            <!-- Blog Item Button Start -->
+                            <div class="post-item-btn">
+                                <a href="{% url 'blog_single' %}" class="post-btn">read more</a>
+                            </div>
+                            <!-- Blog Item Button End -->
+                        </div>
+                        <!-- Post Item Body End -->
+                    </div>
+                    <!-- Post Item End -->
+                </div> {% endcomment %}
+
+                {% comment %} <div class="col-lg-12">
+                    <!-- Page Pagination Start -->
+                    <div class="page-pagination wow fadeInUp" data-wow-delay="1.2s">
+                        <ul class="pagination">
+                            <li><a href="#"><i class="fa-solid fa-angle-left"></i></a></li>
+                            <li class="active"><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#"><i class="fa-solid fa-angle-right"></i></a></li>
+                        </ul>
+                    </div>
+                    <!-- Page Pagination End -->
+                </div> {% endcomment %}
+
+                <div class="col-lg-12">
+                    <div class="header-btn d-inline-flex">
+                        <a href="{% url 'blog' %}" class="btn-default">voir plus</a>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block script %}
+{% endblock %}

@@ -1,0 +1,166 @@
+﻿{% extends "base_dash.html" %}
+
+{% load static %}
+
+
+{% block style %}
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+{{ form.media }}
+<style>
+    .container{
+        display: flex;
+        justify-content: center;
+    }
+    .col-lg-6 {
+        flex: 0 0 auto;
+        width: 80%!important;
+    }
+    #resume {
+        font-size: 16px;
+        font-weight: 500;
+        width: 100%;
+        line-height: 1.2em;
+        background-color: var(--white-color);
+        color: var(--text-color);
+        border: 1px solid var(--divider-color);
+        border-radius: 0;
+        outline: none;
+        box-shadow: none;
+        padding: 14px 15px;
+    }
+</style>
+
+{% endblock %}
+
+
+{% block content %}
+
+    {% comment %} {{ form.media }}
+    <div class="container">
+        <div class="col-lg-6">
+            <!-- Contact Us Form Start -->
+            <div class="contact-us-form">
+                <!-- Section Title Start -->
+                <div class="section-title">
+                    <h3 class="wow fadeInUp">{{title_boutton}} form</h3>
+                    <h2 class="text-anime-style-2" data-cursor="-opaque">Create Your <span>Article</span></h2>
+                    <p class="wow fadeInUp" data-wow-delay="0.2s">Share your thoughts and ideas with the world. Fill in the required fields to publish your article and engage with your audience.</p>
+                </div>
+                <!-- Section Title End -->
+
+                <!-- Contact Form Start -->
+                <div class="contact-form">
+                    <!-- Contact Form Start -->
+                    {{ form.media }}
+                    {% csrf_token %}
+                    <form action="{{ url_apres_creation }}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        
+                        <div class="col-md-12">
+                            <button type="submit" class="btn-default">{{ title_boutton }}</button>
+                            <div id="msgSubmit" class="h3 hidden"></div>
+                        </div>
+                    </form> 
+                    <!-- Contact Form End -->
+                </div>
+                <!-- Contact Form End -->
+            </div>
+            <!-- Contact Us Form End -->
+        </div>
+    </div> {% endcomment %}
+
+    <div class="container">
+        <div class="col-lg-6">
+            <!-- Contact Us Form Start -->
+            <div class="contact-us-form">
+                <!-- Section Title Start -->
+                <div class="section-title">
+                    <h3 class="wow fadeInUp">{{title_boutton}} form</h3>
+                    <h2 class="text-anime-style-2" data-cursor="-opaque">Create Your <span>Article</span></h2>
+                    <p class="wow fadeInUp" data-wow-delay="0.2s">Share your thoughts and ideas with the world. Fill in the required fields to publish your article and engage with your audience.</p>
+                </div>
+                <!-- Section Title End -->
+
+                <!-- Contact Form Start -->
+                <div class="contact-form">
+                    <!-- Contact Form Start -->
+                    <form action="{{ url_apres_creation }}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="form-group col-md-12 mb-4">
+                                {{ form.titre }}
+                                <div class="help-block with-errors"></div>
+                            </div>
+
+                            <div class="form-group col-md-12 mb-4">
+                                {{ form.couverture }}
+                                <div class="help-block with-errors"></div>
+                            </div>
+
+                            <div class="form-group col-md-12 mb-5">
+                                {{ form.resume}}
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            
+                            <div class="form-group col-md-6 mb-5">
+                                {{ form.categorie_id }}
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            <div class="form-group col-md-6 mb-5">
+                                {{ form.tag_ids }}
+                                <div class="help-block with-errors"></div>
+                            </div>
+
+                            <div class="form-group col-md-12 mb-5">
+                                {{ form.contenu }}
+                                <div class="help-block with-errors"></div>
+                            </div>
+                            
+
+                            <div class="col-md-12">
+                                <button type="submit" class="btn-default">{{ title_boutton }}</button>
+                                <div id="msgSubmit" class="h3 hidden"></div>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- Contact Form End -->
+                </div>
+                <!-- Contact Form End -->
+            </div>
+            <!-- Contact Us Form End -->
+        </div>
+    </div>
+
+
+{% endblock %}
+
+
+{% block script %}
+<!-- Charger jQuery en premier -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Vérifier que jQuery est bien chargé -->
+<script>
+    console.log("Version de jQuery :", jQuery.fn.jquery);
+</script>
+
+<!-- Charger Select2 après jQuery -->
+
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<!-- Initialisation de Select2 -->
+<script>
+    $(document).ready(function() {
+        if ($.fn.select2) {
+            console.log("Select2 chargé !");
+            $('select').select2();
+        } else {
+            console.error("Erreur : Select2 n'est pas chargé correctement.");
+        }
+    });
+
+    console.log(typeof $.fn.select2);
+    
+</script>
+
+{% endblock %}

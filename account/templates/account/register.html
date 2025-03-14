@@ -1,0 +1,197 @@
+{% extends "account/base.html" %}
+
+{% load static %}
+
+{% block style %}
+	<!-- SlickNav Css -->
+	<link href="{% static 'css/slicknav.min.css' %}" rel="stylesheet">
+	<!-- Swiper Css -->
+	<link rel="stylesheet" href="{% static 'css/swiper-bundle.min.css' %}">
+	<!-- Font Awesome Icon Css-->
+	<link href="{% static 'css/all.min.css' %}" rel="stylesheet" media="screen">
+	<!-- Animated Css -->
+	<link href="{% static 'css/animate.css' %}" rel="stylesheet">
+    <!-- Magnific Popup Core Css File -->
+	<link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+	<!-- Mouse Cursor Css File -->
+	<link rel="stylesheet" href="{% static 'css/mousecursor.css' %}">
+	<!-- Main Custom Css -->
+	<link href="{% static 'css/custom.css' %}" rel="stylesheet" media="screen">
+	<!-- Style Css -->
+	<link href="{% static 'css/styles.css' %}" rel="stylesheet" media="screen">
+
+  <style>
+    /* From Uiverse.io by tomaskriegelstein */ 
+.buttonUni {
+  font-size: 18px;
+  
+  color: #192324;
+  font-family: Poppins;
+  font-weight: 400;
+  cursor: pointer;
+  position: relative;
+  border: none;
+  background: none;
+
+  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition-duration: 400ms;
+  transition-property: color;
+  display: inline-flex;
+  align-items: center;
+}
+
+.buttonUni:focus,
+.buttonUni:hover {
+  color: #192324;
+}
+
+.buttonUni:focus:after,
+.buttonUni:hover:after {
+  width: 100%;
+  right: ;
+  left: auto; /* Ensure left is auto to override the initial value */
+}
+
+.buttonUni:after {
+  content: "";
+  pointer-events: none;
+  bottom: -7px;
+  right: auto; /* Start from the right */
+  left: 0; /* Ensure left is auto to override the initial value */
+  position: absolute;
+  width: 0%;
+  height: 1px;
+  background-color: #192324;
+  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition-duration: 500ms;
+  transition-property: width, right;
+}
+
+.svg-icon {
+  width: 0.9em;
+  height: 0.8em;
+  margin-left: 10px;
+  fill: #192324;
+  transform: rotate(-135deg);
+  transition: transform 0.5s ease-out;
+}
+
+.buttonUni:hover .svg-icon {
+  transform: rotate(-180deg);
+  fill: grey;
+}
+
+</style>
+{% endblock style %}
+
+{% block body %}
+
+<section class="vh-100" style="background-color: #eee">
+  <div class="container h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-12 col-xl-11">
+        <div class="card text-black" style="border-radius: 25px">
+          <div class="card-body p-md-5">
+            <div class="container d-flex justify-content-center align-items-center">
+              <div class="section-title">
+                <h3 class="wow fadeInUp">register form</h3>
+                <h2 class="text-anime-style-2" data-cursor="-opaque">We can't wait to see <span>your thoughts</span></h2>
+                <p class="wow fadeInUp" data-wow-delay="0.2s">Rejoignez notre communauté sans souci ! Profitez d'une inscription simple et rapide pour partager vos idées ✨.</p>
+            </div>
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+                {% comment %} <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
+                  Sign up
+                </p> {% endcomment %}
+                <!-- Section Title Start -->
+                
+                
+                {% if error %}
+                <div class="alert alert-danger" role="alert" data-mdb-color="danger">
+                  {{ message }}
+                </div>
+                {% endif %}
+                
+                <div class="contact-form" >
+                  <!-- Contact Form Start -->
+                  <form action="#" method="POST" data-toggle="validator" class="wow fadeInUp" data-wow-delay="0.4s">
+                    {% csrf_token %}
+                      <div class="row">
+                          <div class="form-group col-md-6 mb-4">
+                              <input type="text" name="name" class="form-control" id="name" placeholder="Name*" required>
+                              <div class="help-block with-errors"></div>
+                          </div>
+
+                          <div class="form-group col-md-6 mb-4">
+                              <input type="email" name ="email" class="form-control" id="email" placeholder="Email Address*" required>
+                              <div class="help-block with-errors"></div>
+                          </div>
+
+                          <div class="form-group col-md-12 mb-4">
+                              <input type="password" name="password1" class="form-control" id="password1" placeholder="Your password" required>
+                              <div class="help-block with-errors"></div>
+                          </div>
+                          
+                          <div class="form-group col-md-12 mb-4">
+                              <input type="password" name="password2" class="form-control" id="password2" placeholder="Confirm your password" required>
+                              <div class="help-block with-errors"></div>
+                          </div>
+
+                          <div class="row mb-4">
+                            <div class="col">
+                              <!-- Simple link -->
+                              <a href="{% url "sing_in" %}" class="buttonUni">
+                                <span>Se connecter ?</span>
+                                <span class="icon">
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 448 512"
+                                    class="svg-icon"
+                                  >
+                                    <path
+                                      d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"
+                                    ></path>
+                                  </svg>
+                                </span>
+                              </a>
+                              
+                            </div>
+                            
+                          </div>
+  
+
+                          <div class="col-md-12">
+                              <button type="submit" class="btn-default">S'inscrire</button>
+                              <div id="msgSubmit" class="h3 hidden"></div>
+                          </div>
+                      </div>
+                  </form>
+                  <!-- Contact Form End -->
+              </div>
+              </div>
+              <div
+                class="col-md-10 col-lg-6 col-xl-4 d-flex align-items-center justify-content-center order-1 order-lg-2"
+              >
+                {% comment %} <img
+                  src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                  class="img-fluid"
+                  alt="Sample image"
+                /> {% endcomment %}
+                <dotlottie-player src="{% static 'animations/register_anime_colored.json' %}" background="transparent" speed="1" style="width: 300px; height: 300px" loop autoplay class="img-fluid" alt="annimation register"
+                ></dotlottie-player>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock body %}
+
+
+{% block script %}
+<script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
+{% endblock script %}

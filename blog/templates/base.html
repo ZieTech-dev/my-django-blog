@@ -1,0 +1,355 @@
+﻿{% load static %}
+
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+	<!-- Meta -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta name="author" content="Awaiken">
+    {% block style %}
+    {% endblock %}
+	<!-- Page Title -->
+    <title>Inspaire - Architecture and Interior Design HTML Template</title>
+	<!-- Favicon Icon -->
+	<link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon.png' %}">
+	<!-- Google Fonts Css-->
+	<link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet">
+	<!-- Bootstrap Css -->
+	<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" media="screen">
+	<!-- SlickNav Css -->
+	<link href="{% static 'css/slicknav.min.css' %}" rel="stylesheet">
+	<!-- Swiper Css -->
+	<link rel="stylesheet" href="{% static 'css/swiper-bundle.min.css' %}">
+	<!-- Font Awesome Icon Css-->
+	<link href="{% static 'css/all.min.css' %}" rel="stylesheet" media="screen">
+	<!-- Animated Css -->
+	<link href="{% static 'css/animate.css' %}" rel="stylesheet">
+    <!-- Magnific Popup Core Css File -->
+	<link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+	<!-- Mouse Cursor Css File -->
+	<link rel="stylesheet" href="{% static 'css/mousecursor.css' %}">
+	<!-- Main Custom Css -->
+	<link href="{% static 'css/custom.css' %}" rel="stylesheet" media="screen">
+	<!-- Style Css -->
+	<link href="{% static 'css/styles.css' %}" rel="stylesheet" media="screen">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=account_circle" />
+    
+    
+</head>
+<body>
+
+    <!-- Preloader Start -->
+	<div class="preloader">
+		<div class="loading-container">
+			<div class="loading"></div>
+			<div id="loading-icon"><img src="{% static 'images/loader.svg' %}" alt=""></div>
+		</div>
+	</div>
+	<!-- Preloader End -->
+
+    <!-- Header Start -->
+	<header class="main-header">
+		<div class="header-sticky">
+			<nav class="container">
+				<div class="navbar navbar-expand-lg">
+					<!-- Logo Start -->
+					<a class="navbar-brand" href="{% url 'index' %}">
+						<img src="{% static 'images/logo.svg' %}" alt="Logo">
+					</a>
+					<!-- Logo End -->
+
+					<!-- Main Menu Start -->
+					<div class="collapse navbar-collapse main-menu">
+                        <div class="nav-menu-wrapper">
+                            <ul class="navbar-nav mr-auto" id="menu">
+                                <li class="nav-item submenu"><a class="nav-link {{ active_index }}" href="{% url 'index' %}">Home</a>
+                                    <!-- <ul>
+                                        <li class="nav-item"><a class="nav-link" href="index-2.html">Home - Image</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="index-video.html">Home - Video</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="index-slider.html">Home - Slider</a></li>
+                                    </ul> -->
+                                </li>
+                                <li class="nav-item"><a class="nav-link {{ active_about }}" href="{% url 'about' %}">About Us</a>
+                                <!-- <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li> -->
+                                <!-- <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li> -->
+                                <li class="nav-item"><a class="nav-link {{ active_blog }}" href="{% url 'blog' %}">Blog</a></li>
+                                <!-- <li class="nav-item submenu"><a class="nav-link" href="#">Pages</a>
+                                    <ul>                                        
+                                        <li class="nav-item"><a class="nav-link" href="service-single.html">Service Details</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="project-single.html">Project Details</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="blog-single.html">Blog Details</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="image-gallery.html">Image Gallery</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="faqs.html">FAQs</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="404.html">404</a></li>
+                                    </ul>
+                                </li> -->
+                                {% if user.is_authenticated %}
+                                    <li class="nav-item submenu">
+                                        <a class="nav-link" href="{% url 'index' %}">
+                                            (on line)
+                                            <i class="fas fa-user-circle"></i>
+
+                                        </a>
+                                        <ul>
+                                            <li class="nav-item">
+                                                <a href="#" class="nav-link {{ active_create }} ">Profile</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="{% url 'create_article' %}" class="nav-link {{ active_create }} ">Créer un article</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="{% url 'dashboard_blog' %}" class="nav-link {{ active_dashboard_blog }} ">Dashboard</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="{% url 'log_out' %}" class="nav-link">Déconnexion</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                {% else %}
+                                    <li class="nav-item">
+                                        <a href="{% url 'sing_in' %}" class="nav-link {{ active_connexion }} ">Connexion</a>
+                                    </li>
+                                    
+                                    <li class="nav-item">
+                                        <a href="{% url 'register' %}" class="nav-link {{ active_inscription }} ">Inscription</a>
+                                    </li>
+                                {% endif %}
+                                <li class="nav-item"><a class="nav-link {{ active_contact }}" href="{% url 'contact' %}">Contact Us</a></li>                             
+                            </ul>
+                        </div>
+                        <!-- Header Btn Start -->
+                        <div class="header-btn d-inline-flex">
+                            <a href="{% url 'contact' %}" class="btn-default">get in touch</a>
+                        </div>
+                        {% comment %} {% if user.is_authenticated %}
+                            <div class="header-btn d-inline-flex">
+                                <a href="{% url 'create_article' %}" class="btn-default">Créer un article</a>
+                            </div>
+                            <div class="header-btn d-inline-flex">
+                                <a href="{% url 'log_out' %}" class="btn-default">Déconnexion</a>
+                            </div>
+                        {% else %}
+                            <div class="header-btn d-inline-flex">
+                                <a href="{% url 'connexion' %}" class="btn-default">Connexion</a>
+                            </div>
+                            
+                            <div class="header-btn d-inline-flex">
+                                <a href="{% url 'inscription' %}" class="btn-default">Inscription</a>
+                            </div>
+                        {% endif %} {% endcomment %}
+                        <!-- Header Btn End -->
+					</div>
+					<!-- Main Menu End -->
+					<div class="navbar-toggle"></div>
+				</div>
+			</nav>
+			<div class="responsive-menu"></div>
+		</div>
+	</header>
+	<!-- Header End -->
+
+    <!-- Page Header Start -->
+	<div class="page-header parallaxie">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<!-- Page Header Box Start -->
+                    {% block Boxheader %}     
+                    {% endblock Boxheader %}
+					<!-- Page Header Box End -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Page Header End -->
+
+    {% block content %}
+    {% endblock %}
+
+    <!-- Footer Start -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- Footer Header Start -->
+                    <div class="footer-header">
+                        <div class="row align-items-center">  
+                            <div class="col-md-6">
+                                <!-- Footer Logo Start -->
+                                <div class="footer-logo">
+                                    <img src="{% static 'images/footer-logo.svg' %}" alt="">
+                                </div>
+                                <!-- Footer Logo End -->
+                            </div>
+
+                            <div class="col-md-6">
+                                <!-- Footer Social Link Start -->
+                                <div class="footer-social-links">
+                                    <div class="footer-social-link-title">
+                                        <h3>follow our socials</h3>
+                                    </div>
+                                    <ul>
+                                        <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
+                                        <li><a href="#"><i class="fa-brands fa-dribbble"></i></a></li>
+                                        <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                                    </ul>
+                                </div>
+                                <!-- Footer Social Link End -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Footer Header End -->
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <!-- Footer Links Start -->
+                     <div class="footer-links">
+                        <h3>information</h3>
+                        <ul>
+                            <li><a href="{% url 'about' %}">about our company</a></li>
+                            <li><a href="#">view our service</a></li>
+                            <li><a href="#">careers at company</a></li>
+                            <li><a href="{% url 'blog' %}">read our blog</a></li>
+                            <li><a href="#">our latest projects</a></li>
+                        </ul>
+                     </div>
+                    <!-- Footer Links End -->
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <!-- Footer Links Start -->
+                     <div class="footer-links">
+                        <h3>portfolio</h3>
+                        <ul>
+                            <li><a href="#">luxury home design</a></li>
+                            <li><a href="#">residential interior design</a></li>
+                            <li><a href="#">commercial space design</a></li>
+                            <li><a href="#">residential interior design</a></li>
+                            <li><a href="#">renovation and restoration design</a></li>
+                        </ul>
+                     </div>
+                    <!-- Footer Links End -->
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <!-- Footer Contact Box Start -->
+                    <div class="footer-contact-box footer-links">
+                        <h3>contact us</h3>
+                        <!-- Footer Contact Item Start -->
+                        <div class="footer-contact-item">
+                            <div class="icon-box">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div class="footer-contact-content">
+                                <p>+1 (213) 465 789</p>
+                            </div>
+                        </div>
+                        <!-- Footer Contact Item End -->
+
+                        <!-- Footer Contact Item Start -->
+                        <div class="footer-contact-item">
+                            <div class="icon-box">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div class="footer-contact-content">
+                                <p>info@domain.com</p>
+                            </div>
+                        </div>
+                        <!-- Footer Contact Item End -->
+
+                        <!-- Footer Contact Item Start -->
+                        <div class="footer-contact-item">
+                            <div class="icon-box">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div class="footer-contact-content">
+                                <p>Generała Ziętka Jerzego 54, Mysłowice 41-412</p>
+                            </div>
+                        </div>
+                        <!-- Footer Contact Item End -->
+                    </div>
+                    <!-- Footer Contact Box End -->
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <!-- Footer Newsletter Form Start -->
+                    <div class="footer-latest-news footer-links">
+                        <h3>get the latest trending news</h3>
+                        
+                        <div class="footer-newsletter-form">
+                            <p>Your Dream Space Starts Here Get Exclusive Design Straight Your Inbox!</p>
+
+                            <form id="newslettersForm" action="#" method="POST">
+                                <div class="form-group">
+                                    <input type="email" name="email" class="form-control"  id="mail" placeholder="Enter your email" required>
+                                    <button type="submit"><i class="fa-solid fa-arrow-right-long"></i> </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- Footer Newsletter Form End -->
+                </div>
+            </div>
+
+            <!-- Footer Copyright Section Start -->
+            <div class="footer-copyright">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- Footer Copyright Start -->
+                        <div class="footer-copyright-text">
+                            <p>Copyright © 2024 All Rights Reserved.</p>
+                        </div>
+                        <!-- Footer Copyright End -->
+                    </div>
+                </div>
+            </div>
+            <!-- Footer Copyright Section End -->
+        </div>
+    </footer>
+    <!-- Footer End -->
+    {% block script %}
+    {% endblock %}
+
+    <!-- Jquery Library File -->
+    <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+    <!-- Bootstrap js file -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <!-- Validator js file -->
+    <script src="{% static 'js/validator.min.js' %}"></script>
+    <!-- SlickNav js file -->
+    <script src="{% static 'js/jquery.slicknav.js' %}"></script>
+    <!-- Swiper js file -->
+    <script src="{% static 'js/swiper-bundle.min.js' %}"></script>
+    <!-- Counter js file -->
+    <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'js/jquery.counterup.min.js' %}"></script>
+    <!-- Isotop js file -->
+	<script src="{% static 'js/isotope.min.js' %}"></script>
+    <!-- Magnific js file -->
+    <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+    <!-- SmoothScroll -->
+    <script src="{% static 'js/SmoothScroll.js' %}"></script>
+    <!-- Parallax js -->
+    <script src="{% static 'js/parallaxie.js' %}"></script>
+    <!-- MagicCursor js file -->
+    <script src="{% static 'js/gsap.min.js' %}"></script>
+    <script src="{% static 'js/magiccursor.js' %}"></script>
+    <!-- Text Effect js file -->
+    <script src="{% static 'js/SplitText.js' %}"></script>
+    <script src="{% static 'js/ScrollTrigger.min.js' %}"></script>
+    <!-- YTPlayer js File -->
+    <script src="{% static 'js/jquery.mb.YTPlayer.min.js' %}"></script>
+    <!-- Wow js file -->
+    <script src="{% static 'js/wow.min.js' %}"></script>
+    <!-- Main Custom js file -->
+    <script src="{% static 'js/function.js' %}"></script>
+    
+</body>
+
+</html>

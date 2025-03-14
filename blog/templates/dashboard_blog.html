@@ -1,0 +1,134 @@
+﻿{% extends "base.html" %}
+
+{% load static %}
+
+
+{% block Boxheader %}
+
+    <div class="page-header-box">
+        <h1 class="text-anime-style-2" data-cursor="-opaque">Dashboard</h1>
+        {% if user.is_authenticated %}
+            <h4 class="text-anime-style-2" data-cursor="-opaque">Bienvenue👋, {{ user.username }} !</h4>
+        {% endif %}
+        <nav class="wow fadeInUp">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'index' %}">home</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'about' %}">Dashboard</a></li>
+            </ol>
+        </nav>
+    </div>
+{% endblock Boxheader %}
+
+{% block style %}
+{% comment %} <script src="https://cdn.tailwindcss.com"></script> {% endcomment %}
+<style>
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .table {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 1200px;
+        border-collapse: collapse;
+        background: #2c2c2c;
+        font-family: "Courier New", Courier, monospace;
+        color: white;
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    .table__header,
+    .table__row {
+        display: flex;
+        width: 100%;
+    }
+
+    .table__header {
+        font-weight: bold;
+        background: #444;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .table__cell {
+        flex: 1;
+        padding: 10px;
+        
+        {% comment %} text-align: center; {% endcomment %}
+        {% comment %} border-bottom: 1px solid #a79f9f; {% endcomment %}
+    }
+    .table__cell div {
+        
+        background: #2c2c2c;
+    }
+
+    .table__cell img {
+        max-width: 100px;
+        height: auto;
+        border-radius: 5px;
+    }
+    @keyframes draw {
+        to {
+          stroke-dashoffset: 0;
+        }
+      }
+</style>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+    <div class="col-lg-12">
+        <!-- Pagination -->
+        {% include "components/paginator.html" with datas=articles %}
+    </div>
+    <div class="table">
+        <div class="table__header">
+            <div class="table__cell">ID</div>
+            <div class="table__cell">Titre</div>
+            <div class="table__cell">Couverture</div>
+            <div class="table__cell">Contenu</div>
+            <div class="table__cell">Date de publication</div>
+            <div class="table__cell">Créé le</div>
+            <div class="table__cell">Dernière MAJ</div>
+            {% comment %} <div class="table__cell">Auteur</div> {% endcomment %}
+            <div class="table__cell">Catégorie</div>
+            <div class="table__cell">Action</div>
+        </div>
+        {% for article in articles %}
+        <div class="table__row">
+            <div class="table__cell">{{ article.id }}</div>
+            <div class="table__cell">{{ article.titre }}</div>
+            <div class="table__cell">
+                <img src="{{ article.couverture.url }}" alt="{{ article.titre }}">
+            </div>
+            <div class="table__cell">{{ article.contenu|truncatewords:3 }}</div>
+            <div class="table__cell">{{ article.date_de_publication }}</div>
+            <div class="table__cell">{{ article.created_at }}</div>
+            <div class="table__cell">{{ article.last_updated_at }}</div>
+            {% comment %} <div class="table__cell">{{ article.auteur_id }}</div> {% endcomment %}
+            <div class="table__cell">{{ article.categorie_id }}</div>
+            <div class="table__cell">
+                <div class="d-flex'flex-column gap-3">
+                    {% comment %} <a class="btn btn-primary" href="{% url 'blog' %}">Plus</a> {% endcomment %}
+                    <a href="{% url 'blog_single' article.slug %}" class="btn btn-primary mb-3 text-white font-weight-bold py-2 px-4 rounded shadow-sm hover:bg-warning transition-all duration-300">plus</a>
+                    <a href="{% url 'dashboard_blog_update' article.slug %}" class="btn btn-warning  mb-3 text-white font-weight-bold py-2 px-4 rounded shadow-sm hover:bg-warning transition-all duration-300">Modifier</a>
+                    <a href="{% url 'dashboard_blog_delete' article.slug %}" class="btn btn-danger text-white font-weight-bold py-2 px-4 rounded shadow-sm hover:bg-danger transition-all duration-300">Supprimer</a>
+                    
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+{% comment %} <script src="https://cdn.tailwindcss.com"></script> {% endcomment %}
+
+{% endblock %}
+

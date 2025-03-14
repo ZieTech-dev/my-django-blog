@@ -1,0 +1,13 @@
+﻿.active{
+    color: rgba(197, 129, 2, 0.721) !important;
+}
+.material-symbols-outlined{
+    transform: translate(7px, 3px) !important;
+    
+}
+
+
+.list-com{
+    display:flex;
+    flex-direction: row;
+}
